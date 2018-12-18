@@ -20,15 +20,16 @@ export class StepPageComponent implements OnDestroy {
         eventAttributes => this.eventAttributes = eventAttributes
       );
 
-    this.subscriptions.push(stepService.stepEmitter.subscribe(
-      steps => {
-        this.steps = steps;
+    this.subscriptions.push(stepService.resetEmitter.subscribe(
+      () => {
+        this.steps = [];
       }
     ));
   }
 
   addStep() {
-    this.stepService.createStep(this.eventAttributes[0].name);
+    const step = this.stepService.createStep(this.eventAttributes[0].name);
+    this.steps.push(step);
   }
 
   ngOnDestroy() {

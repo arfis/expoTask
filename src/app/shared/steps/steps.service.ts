@@ -9,6 +9,7 @@ import { Step } from '../../model/Step';
 export class StepsService {
 
   stepEmitter = new Subject<Step[]>();
+  resetEmitter = new Subject();
 
   steps = [];
 
@@ -36,13 +37,14 @@ export class StepsService {
 
   resetSteps() {
     this.steps = [];
-    this.stepEmitter.next(this.steps);
+    this.resetEmitter.next();
   }
 
   createStep(name) {
     const step = new Step(this.steps.length, name);
     this.steps.push(step);
     this.stepEmitter.next(this.steps);
+    return step;
   }
 
   getEventAttributes(): Observable<any[]> {
