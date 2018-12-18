@@ -1,15 +1,15 @@
 import { Event } from './Event';
 import { Filter } from './Filter';
+import { ConfiguredAttribute } from './Attribute';
 
 export class Step {
   name;
   index;
-  selecterdEvent: Event;
-  eventAttributes: Event[];
+  events: ConfiguredAttribute[];
 
-  constructor(index, name?, eventAttribute?) {
+  constructor(index, name?, events?) {
     this.name = name;
     this.index = index;
-    this.eventAttributes = eventAttribute;
+    this.events = events;
   }
 }

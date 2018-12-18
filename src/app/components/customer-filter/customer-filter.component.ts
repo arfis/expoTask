@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Filter } from '../../model/Filter';
+import { StepsService } from '../../shared/steps/steps.service';
 
 @Component({
   selector: 'ms-customer-filter',
@@ -10,9 +11,8 @@ export class CustomerFilterComponent implements OnInit {
 
   @Output('onAddStep') onAddStepEmitter = new EventEmitter();
 
-  filters: Filter[];
-
-  constructor() { }
+  constructor(private stepService: StepsService) {
+  }
 
   ngOnInit() {
   }
@@ -22,7 +22,7 @@ export class CustomerFilterComponent implements OnInit {
   }
 
   applyFilters() {
-    console.log(this.filters);
+    console.log(this.stepService.steps);
   }
 
   addStep() {

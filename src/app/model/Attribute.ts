@@ -4,4 +4,5 @@ export class ConfiguredAttribute {
   attribute: string;
   operation: Operation;
   value: string;
+  valueTo: string;
 }

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { StepsService } from '../../shared/steps/steps.service';
 
 @Component({
   selector: 'ms-step',
@@ -10,12 +11,15 @@ export class StepComponent implements OnInit {
 
   @Input('step') step;
   @Input('eventAttributes') eventAttributes;
+  @Output('onChange') onChangeEmitter = new EventEmitter();
 
-  constructor() {
+  constructor(private stepService: StepsService) {
   }
 
   changeStep(step) {
     this.step = {...this.step, ...step};
+    this.onChangeEmitter.next(this.step);
+    this.stepService.updateStep(this.step);
   }
 
   ngOnInit() {

@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
+import { Step } from '../../model/Step';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StepsService {
+
+  steps = [];
 
   eventAttributes = [
     {
@@ -23,6 +26,16 @@ export class StepsService {
   ];
 
   constructor() {
+  }
+
+  updateStep(step) {
+    this.steps[step.index] = step;
+  }
+
+  createStep(name) {
+    const step = new Step(this.steps.length, name);
+    this.steps.push(step);
+    return step;
   }
 
   getEventAttributes(): Observable<any[]> {
