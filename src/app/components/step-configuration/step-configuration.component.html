@@ -7,7 +7,7 @@
     </div>
 
     <div class="events" formArrayName="events">
-      <div *ngFor="let event of events.controls; let i=index">
+      <div class="configuration-row" *ngFor="let event of events.controls; let i=index">
         <select>
           <option *ngFor="let attribute of selectedEventAttributes">{{attribute}}</option>
         </select>
@@ -16,8 +16,9 @@
           <option *ngFor="let operation of operations">{{operation | translate}}</option>
         </select>
         <input>
+        <span class="remove" (click)="removeRow(i)">X</span>
       </div>
-      <span (click)="addEvent()" class="add">{{addEventString | translate}}</span>
+      <span class="add" (click)="addEvent()">{{addEventString | translate}}</span>
     </div>
   </form>
 </div>

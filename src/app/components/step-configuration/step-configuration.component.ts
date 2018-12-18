@@ -33,6 +33,9 @@ export class StepConfigurationComponent implements OnInit {
     this.events.push(event);
   }
 
+  removeRow(index) {
+    this.events.removeAt(index);
+  }
 
   get events() {
     return this.configurationForm.get('events') as FormArray;
@@ -43,12 +46,10 @@ export class StepConfigurationComponent implements OnInit {
   }
 
   get selectedEvent() {
-    console.log(this.configurationForm.get('selectedEvent'));
     return this.configurationForm.get('selectedEvent').value;
   }
 
   get selectedEventAttributes() {
-    console.log(this.selectedEvent);
     const attributes = this.eventAttributes.find(attribute => attribute.name === this.selectedEvent).attributes;
     return attributes;
   }

@@ -1,3 +1,30 @@
+@import '../../../libs/colors';
+
 .action-event {
   display: flex;
+
+  .remove {
+    cursor: pointer;
+
+    &:hover {
+      color: $color-light-gray;
+    }
+  }
+}
+
+.add {
+  color: $color-border-blue;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px;
+}
+
+.configuration-row {
+  &:nth-child(n+2) {
+    margin-top: 5px;
+  }
+
+  * {
+    margin: 0px 5px;
+  }
 }
