@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ms-step-configuration',
   templateUrl: './step-configuration.component.html',
-  styleUrls: ['./step-configuration.component.scss']
+  styleUrls: ['./step-configuration.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepConfigurationComponent implements OnInit {
 
@@ -14,8 +15,11 @@ export class StepConfigurationComponent implements OnInit {
   operations = ['operation.equal', 'operation.smallerThan', 'operation.biggerThan'];
 
   constructor(private fb: FormBuilder) {
-    this.configurationForm = fb.group({
-      selectedEvent: [''],
+  }
+
+  ngOnInit() {
+    this.configurationForm = this.fb.group({
+      selectedEvent: [this.eventAttributes[0].name],
       events: this.fb.array([])
     });
   }
@@ -39,10 +43,14 @@ export class StepConfigurationComponent implements OnInit {
   }
 
   get selectedEvent() {
-    return this.configurationForm.get('selectedEvent');
+    console.log(this.configurationForm.get('selectedEvent'));
+    return this.configurationForm.get('selectedEvent').value;
   }
 
-  ngOnInit() {
+  get selectedEventAttributes() {
+    console.log(this.selectedEvent);
+    const attributes = this.eventAttributes.find(attribute => attribute.name === this.selectedEvent).attributes;
+    return attributes;
   }
 
 }

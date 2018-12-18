@@ -1,13 +1,15 @@
 <div class="wrapper">
-  <form [formGroup]="configurationForm">
-    <select>
-      <option *ngFor="let step of eventAttributes">{{step.name}}</option>
-    </select>
+  <form class="action-event" [formGroup]="configurationForm">
+    <div class="name">
+      <select formControlName="selectedEvent">
+        <option *ngFor="let step of eventAttributes">{{step.name}}</option>
+      </select>
+    </div>
 
-    <div formArrayName="events">
+    <div class="events" formArrayName="events">
       <div *ngFor="let event of events.controls; let i=index">
         <select>
-          <!--<option *ngFor="let attribute of selectedEvent">{{attribute}}</option>-->
+          <option *ngFor="let attribute of selectedEventAttributes">{{attribute}}</option>
         </select>
 
         <select>
@@ -15,7 +17,7 @@
         </select>
         <input>
       </div>
+      <span (click)="addEvent()" class="add">{{addEventString | translate}}</span>
     </div>
   </form>
-  <span (click)="addEvent()" class="add">{{addEventString | translate}}</span>
 </div>
