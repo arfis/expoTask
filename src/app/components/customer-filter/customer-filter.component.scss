@@ -11,7 +11,8 @@
     .add-new {
       cursor: pointer;
       padding-top: 20px;
-      margin-left: 50%;
+      display: block;
+      text-align: center;
       text-transform: uppercase;
       color: $color-border-blue;
     }

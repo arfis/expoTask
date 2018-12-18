@@ -1,0 +1,27 @@
+@import '../../../libs/colors';
+
+.panel-wrapper {
+  position: absolute;
+  background: white;
+  width: 50vh;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-x: auto;
+
+  .found-item {
+    padding: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 33%;
+
+    &:hover {
+      background-color: $color-light-gray;
+    }
+  }
+
+  .selected {
+    background-color: $color-light-gray;
+  }
+}

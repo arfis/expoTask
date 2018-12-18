@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { forwardRef, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxsModule } from '@ngxs/store';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { CustomerFilterComponent } from './components/customer-filter/customer-filter.component';
 import { StepComponent } from './components/step/step.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StepHeaderComponent } from './components/step-header/step-header.component';
 import { StepPageComponent } from './container/step-page/step-page.component';
 import { StepConfigurationComponent } from './components/step-configuration/step-configuration.component';
+import { SelectInputComponent } from './components/select-input/select-input.component';
+import { SelectPanelComponent } from './components/select-panel/select-panel.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { StepConfigurationComponent } from './components/step-configuration/step
     StepHeaderComponent,
     StepPageComponent,
     StepConfigurationComponent,
+    SelectInputComponent,
+    SelectPanelComponent,
   ],
   imports: [
     BrowserModule,

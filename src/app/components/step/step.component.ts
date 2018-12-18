@@ -14,15 +14,11 @@ export class StepComponent {
   @Input('eventAttributes') eventAttributes;
   @Output('onChange') onChangeEmitter = new EventEmitter();
 
-  constructor(private stepService: StepsService) {
-  }
-
   changeStep(step) {
     const {events, name} = step;
     this.step.events = events;
     this.step.name = name;
     this.onChangeEmitter.next(this.step);
-    this.stepService.updateStep(this.step);
   }
 
   get index() {

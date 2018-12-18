@@ -1,0 +1,7 @@
+<div class="panel-wrapper">
+  <div *ngFor="let word of data; let i = index" class="found-item"
+       [ngClass]="{'selected' : i === selectedIndex}"
+       (click)="emitSelection(word)">
+    {{word}}
+  </div>
+</div>

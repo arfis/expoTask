@@ -1,9 +1,7 @@
 <div class="wrapper">
   <form class="action-event" [formGroup]="configurationForm">
     <div class="name">
-      <select formControlName="name">
-        <option *ngFor="let step of eventAttributes">{{step.name}}</option>
-      </select>
+      <ms-select-input formControlName="name" [data]="eventNames"></ms-select-input>
     </div>
 
     <div class="events" formArrayName="events">

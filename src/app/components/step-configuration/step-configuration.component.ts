@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { Operation } from '../../model/Operation';
 
@@ -8,12 +8,13 @@ import { Operation } from '../../model/Operation';
   styleUrls: ['./step-configuration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepConfigurationComponent implements OnInit {
+export class StepConfigurationComponent implements OnInit, OnChanges {
 
   @Input('eventAttributes') eventAttributes;
   @Output('onValueChanges') valueChanges = new EventEmitter();
 
   configurationForm;
+  eventNames = [];
   operations = [
     {
       title: 'operation.equal',
@@ -47,6 +48,14 @@ export class StepConfigurationComponent implements OnInit {
         this.valueChanges.next(form);
       }
     );
+
+    this.setupEventNames();
+  }
+
+  ngOnChanges(changes) {
+    if (changes.eventAttributes) {
+      this.setupEventNames();
+    }
   }
 
   addEvent() {
@@ -65,6 +74,10 @@ export class StepConfigurationComponent implements OnInit {
 
   isBetween(index) {
     return this.events.at(index).value.operation === Operation.IN_BETWEEN;
+  }
+
+  private setupEventNames() {
+    this.eventNames = this.eventAttributes.map(event => event.name);
   }
 
   get events() {

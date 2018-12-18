@@ -1,5 +1,6 @@
 <ms-customer-filter (onAddStep)="addStep()">
   <ms-step *ngFor="let step of steps"
+           (onChange)="onStepChange($event)"
            [eventAttributes]="eventAttributes"
            [step]="step"></ms-step>
 </ms-customer-filter>

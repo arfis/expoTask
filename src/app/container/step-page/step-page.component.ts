@@ -12,12 +12,19 @@ export class StepPageComponent implements OnDestroy {
   steps = [];
   eventAttributes = [];
   subscriptions = [];
+  existingData = [];
+  // existingData = ['python_1', 'python_2', 'python_3', 'test123', 'test321',
+  //   'qweqwe', 'pyth123', 'qweqweqw', 'ewqeqwewqd', 'dsadasdasas', '1', '2', '3', '4','python_1', 'python_2', 'python_3', 'test123', 'test321',
+  //   'qweqwe', 'pyth123', 'qweqweqw', 'ewqeqwewqd', 'dsadasdasas', '1', '2', '3', '4'];
 
   constructor(private stepService: StepsService) {
     stepService.getEventAttributes()
       .pipe(take(1))
       .subscribe(
-        eventAttributes => this.eventAttributes = eventAttributes
+        eventAttributes => {
+          this.eventAttributes = eventAttributes;
+          this.existingData = eventAttributes.map(item => item.name);
+        }
       );
 
     this.subscriptions.push(stepService.resetEmitter.subscribe(
@@ -25,6 +32,10 @@ export class StepPageComponent implements OnDestroy {
         this.steps = [];
       }
     ));
+  }
+
+  onStepChange(step) {
+    this.stepService.updateStep(step);
   }
 
   addStep() {

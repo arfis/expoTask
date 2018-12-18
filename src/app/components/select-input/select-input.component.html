@@ -1,0 +1,7 @@
+<input [(ngModel)]="value" #searchInput>
+
+<ng-container *ngIf="foundData?.length">
+  <ms-select-panel
+    (onSelection)="setupInput($event)"
+    [data]="foundData"></ms-select-panel>
+</ng-container>

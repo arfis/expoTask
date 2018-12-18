@@ -6,7 +6,7 @@
 
   <div class="content">
     <ng-content></ng-content>
-    <span (click)="addStep()" class="add-new">{{'customerFilter.addStep' | translate}}</span>
+    <div (click)="addStep()" class="add-new">{{'customerFilter.addStep' | translate}}</div>
   </div>
 
   <button class="btn-exponea" (click)="applyFilters()">{{'customerFilter.apply' | translate}}</button>
