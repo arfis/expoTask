@@ -35,7 +35,8 @@ export class StepsService {
   }
 
   resetSteps() {
-    this.stepEmitter.next([]);
+    this.steps = [];
+    this.stepEmitter.next(this.steps);
   }
 
   createStep(name) {
