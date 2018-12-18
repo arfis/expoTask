@@ -11,7 +11,7 @@ export class StepsService {
   stepEmitter = new Subject<Step[]>();
   resetEmitter = new Subject();
 
-  steps = [];
+  steps: Step[] = [];
 
   eventAttributes = [
     {
@@ -31,7 +31,7 @@ export class StepsService {
   constructor() {
   }
 
-  updateStep(step) {
+  updateStep(step: Step) {
     this.steps[step.index] = step;
   }
 

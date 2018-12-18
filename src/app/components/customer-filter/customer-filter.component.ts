@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Filter } from '../../model/Filter';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StepsService } from '../../shared/steps/steps.service';
 
 @Component({
