@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { of } from 'rxjs';
 import { Step } from '../../model/Step';
 
@@ -7,6 +7,8 @@ import { Step } from '../../model/Step';
   providedIn: 'root'
 })
 export class StepsService {
+
+  stepEmitter = new Subject<Step[]>();
 
   steps = [];
 
@@ -30,6 +32,10 @@ export class StepsService {
 
   updateStep(step) {
     this.steps[step.index] = step;
+  }
+
+  resetSteps() {
+    this.stepEmitter.next([]);
   }
 
   createStep(name) {

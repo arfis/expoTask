@@ -18,7 +18,7 @@ export class CustomerFilterComponent implements OnInit {
   }
 
   resetFilters() {
-
+    this.stepService.resetSteps();
   }
 
   applyFilters() {
