@@ -43,8 +43,6 @@ export class SelectInputComponent implements OnInit, OnDestroy, ControlValueAcce
         event => {
           const { key } = event as KeyboardEvent;
           if (key === 'Enter') {
-            event.preventDefault();
-            event.stopImmediatePropagation();
             this.setupInput(this.value);
           } else {
             this.searchValue = this.value;
