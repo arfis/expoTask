@@ -21,13 +21,14 @@ export class StepPageComponent implements OnDestroy {
       );
 
     this.subscriptions.push(stepService.stepEmitter.subscribe(
-      steps => this.steps = steps
+      steps => {
+        this.steps = steps;
+      }
     ));
   }
 
   addStep() {
-    const step = this.stepService.createStep(this.eventAttributes[0].name);
-    this.steps.push(step);
+    this.stepService.createStep(this.eventAttributes[0].name);
   }
 
   ngOnDestroy() {

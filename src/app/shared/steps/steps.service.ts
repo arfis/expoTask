@@ -42,7 +42,7 @@ export class StepsService {
   createStep(name) {
     const step = new Step(this.steps.length, name);
     this.steps.push(step);
-    return step;
+    this.stepEmitter.next(this.steps);
   }
 
   getEventAttributes(): Observable<any[]> {
