@@ -1,0 +1,44 @@
+@import '../../../libs/colors';
+
+.wrapper {
+  border: 1px solid $color-light-gray;
+  padding: 10px;
+
+  .content {
+    border: 1px solid $color-border-blue;
+    padding: 20px;
+
+    .add-new {
+      cursor: pointer;
+      padding-top: 20px;
+      margin-left: 50%;
+      text-transform: uppercase;
+      color: $color-border-blue;
+    }
+  }
+
+  .btn-exponea {
+    background-color: $color-yellow;
+    border: 0;
+    color: $color-dark-blue;
+    font-size: 14px;
+    margin: 5px;
+    padding: 10px;
+  }
+}
+
+.header {
+  padding: 10px 0px;
+  text-transform: uppercase;
+  font-size: 12px;
+
+  .title {
+
+  }
+
+  .discard {
+    color: $color-light-gray;
+    float: right;
+    cursor: pointer;
+  }
+}

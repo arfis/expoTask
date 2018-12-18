@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="header">
+    <span class="title">{{'customerFilter.title' | translate}}</span>
+    <span (click)="resetFilters()" class="discard">{{'customerFilter.discard' | translate}}</span>
+  </div>
+
+  <div class="content">
+    <ng-content></ng-content>
+    <span (click)="addStep()" class="add-new">{{'customerFilter.addStep' | translate}}</span>
+  </div>
+
+  <button class="btn-exponea" (click)="applyFilters()">{{'customerFilter.apply' | translate}}</button>
+</div>

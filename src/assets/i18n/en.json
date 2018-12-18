@@ -1,0 +1,18 @@
+{
+  "customerFilter": {
+    "title": "Customer filter",
+    "apply": "Apply filters",
+    "discard": "Discard filters",
+    "addStep": "+ add funnel step"
+  },
+  "step": {
+    "title": "{{number}}.Step: ",
+    "addEvent": "Add an event attribute",
+    "refineMore": "Refine more"
+  },
+  "operation": {
+    "equal" : "equal",
+    "smallerThan": "smaller than",
+    "biggerThan": "bigger than"
+  }
+}
