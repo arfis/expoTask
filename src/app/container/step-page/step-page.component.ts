@@ -25,7 +25,7 @@ export class StepPageComponent implements OnInit {
   }
 
   addStep() {
-    const step = new Step(this.steps.length);
+    const step = new Step(this.steps.length, this.eventAttributes[0].name);
     this.steps.push(step);
   }
 

@@ -14,6 +14,10 @@ export class StepComponent implements OnInit {
   constructor() {
   }
 
+  changeStep(step) {
+    this.step = {...this.step, ...step};
+  }
+
   ngOnInit() {
   }
 

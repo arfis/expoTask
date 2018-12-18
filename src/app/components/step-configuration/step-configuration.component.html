@@ -1,21 +1,26 @@
 <div class="wrapper">
   <form class="action-event" [formGroup]="configurationForm">
     <div class="name">
-      <select formControlName="selectedEvent">
+      <select formControlName="name">
         <option *ngFor="let step of eventAttributes">{{step.name}}</option>
       </select>
     </div>
 
     <div class="events" formArrayName="events">
-      <div class="configuration-row" *ngFor="let event of events.controls; let i=index">
-        <select>
+      <div [formGroupName]="i" class="configuration-row" *ngFor="let event of events.controls; let i=index">
+        <select formControlName="name">
           <option *ngFor="let attribute of selectedEventAttributes">{{attribute}}</option>
         </select>
 
-        <select>
-          <option *ngFor="let operation of operations">{{operation | translate}}</option>
+        <select formControlName="operation">
+          <option *ngFor="let operation of operations" [ngValue]="operation.value">{{operation.title | translate}}</option>
         </select>
-        <input>
+        <input formControlName="value">
+
+        <ng-container *ngIf="isBetween(i)">
+          {{'configuration.and' | translate}}
+          <input formControlName="valueTo">
+        </ng-container>
         <span class="remove" (click)="removeRow(i)">X</span>
       </div>
       <span class="add" (click)="addEvent()">{{addEventString | translate}}</span>

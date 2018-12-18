@@ -13,6 +13,10 @@
   "operation": {
     "equal" : "equal",
     "smallerThan": "smaller than",
-    "biggerThan": "bigger than"
+    "biggerThan": "bigger than",
+    "inBetween": "in between"
+  },
+  "configuration": {
+    "and": "and"
   }
 }

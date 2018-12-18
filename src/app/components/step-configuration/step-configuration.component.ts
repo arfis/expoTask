@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { Operation } from '../../model/Operation';
 
 @Component({
   selector: 'ms-step-configuration',
@@ -10,31 +11,60 @@ import { FormArray, FormBuilder } from '@angular/forms';
 export class StepConfigurationComponent implements OnInit {
 
   @Input('eventAttributes') eventAttributes;
+  @Output('onValueChanges') valueChanges = new EventEmitter();
 
   configurationForm;
-  operations = ['operation.equal', 'operation.smallerThan', 'operation.biggerThan'];
+  operations = [
+    {
+      title: 'operation.equal',
+      value: Operation.EQUAL_TO
+    },
+    {
+      title: 'operation.smallerThan',
+      value: Operation.LESS_THAN
+    },
+    {
+      title: 'operation.biggerThan',
+      value: Operation.GREATER_THAN
+    },
+    {
+      title: 'operation.inBetween',
+      value: Operation.IN_BETWEEN
+    }
+  ];
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.configurationForm = this.fb.group({
-      selectedEvent: [this.eventAttributes[0].name],
+      name: [this.eventAttributes[0].name],
       events: this.fb.array([])
     });
+
+    this.configurationForm.valueChanges.subscribe(
+      form => {
+        this.valueChanges.next(form);
+      }
+    );
   }
 
   addEvent() {
     const event = this.fb.group({
-      'name': [''],
-      'operation': [''],
-      'value': ['ks']
+      'name': [this.eventAttributes[0].attributes[0]],
+      'operation': [this.operations[0].value],
+      'value': [''],
+      'valueTo': ['']
     });
     this.events.push(event);
   }
 
   removeRow(index) {
     this.events.removeAt(index);
+  }
+
+  isBetween(index) {
+    return this.events.at(index).value.operation === Operation.IN_BETWEEN;
   }
 
   get events() {
@@ -46,7 +76,7 @@ export class StepConfigurationComponent implements OnInit {
   }
 
   get selectedEvent() {
-    return this.configurationForm.get('selectedEvent').value;
+    return this.configurationForm.get('name').value;
   }
 
   get selectedEventAttributes() {
