@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './step-page.component.html',
   styleUrls: ['./step-page.component.scss']
 })
-export class StepPageComponent implements OnInit {
+export class StepPageComponent {
 
   steps = [];
   eventAttributes = [];
@@ -19,9 +19,6 @@ export class StepPageComponent implements OnInit {
       .subscribe(
         eventAttributes => this.eventAttributes = eventAttributes
       );
-  }
-
-  ngOnInit() {
   }
 
   addStep() {
