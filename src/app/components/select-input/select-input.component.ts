@@ -1,4 +1,15 @@
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef, HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -20,18 +31,29 @@ export class SelectInputComponent implements OnInit, OnDestroy, ControlValueAcce
 
   @Input('delay') delay = 0;
   @Input('data') data = [];
+  @Input('fixed') fixed = false;
 
   @Output('onSelectionChange') onSelectionChangeEmitter = new EventEmitter<string>();
 
-  searchValue;
   foundData;
   subscription;
-  value;
+  value = '';
 
   private propagateChange = (_: any) => {
   };
 
-  constructor(private ref: ChangeDetectorRef) {
+
+  @HostListener('document:click', ['$event'])
+  onClick(event) {
+    if (this.element.nativeElement.contains(event.target)) {
+      this.setupResult(this.value);
+    } else {
+      this.foundData = [];
+    }
+  }
+
+  constructor(private ref: ChangeDetectorRef,
+              private element: ElementRef) {
   }
 
   ngOnInit() {
@@ -45,12 +67,19 @@ export class SelectInputComponent implements OnInit, OnDestroy, ControlValueAcce
           if (key === 'Enter') {
             this.setupInput(this.value);
           } else {
-            this.searchValue = this.value;
-            this.foundData = this.searchInData(this.searchValue);
-            this.ref.markForCheck();
+            this.setupResult(this.value);
           }
         }
       );
+  }
+
+  setupResult(word) {
+    if (!this.fixed) {
+      this.foundData = this.searchInData(word);
+    } else {
+      this.foundData = this.data;
+    }
+    this.ref.markForCheck();
   }
 
   searchInData(word) {
