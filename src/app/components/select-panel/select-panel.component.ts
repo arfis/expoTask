@@ -30,7 +30,9 @@ export class SelectPanelComponent implements OnChanges {
         break;
       }
       case 'Enter': {
-        this.emitSelection();
+        if (this.selectedIndex > -1) {
+          this.emitSelection(this.data[this.selectedIndex]);
+        }
       }
     }
   }
@@ -45,10 +47,8 @@ export class SelectPanelComponent implements OnChanges {
     }
   }
 
-  emitSelection() {
-    if (this.selectedIndex > -1) {
-      this.onSelectionEmitter.next(this.data[this.selectedIndex]);
+  emitSelection(word) {
+      this.onSelectionEmitter.next(word);
       this.selectedIndex = -1;
-    }
   }
 }
