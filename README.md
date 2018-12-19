@@ -1,5 +1,7 @@
 # ExpoTask
 
+On the branch `added-work` is the newest version which was added later on. Also the site is live on: https://jolly-neumann-0ee538.netlify.com.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.8.
 
 ## Development server
