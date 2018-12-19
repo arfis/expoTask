@@ -1,6 +1,13 @@
 <div class="step-wrapper">
-  <ms-step-header [index]="index" [stepName]="name"></ms-step-header>
+  <div class="header">
+    <ms-step-header [index]="index" [stepName]="name"></ms-step-header>
+    <div class="actions">
+      <button (click)="cloneStep()">{{'actions.clone' | translate}}</button>
+      <button (click)="deleteStep()">{{'actions.delete' | translate}}</button>
+    </div>
+  </div>
   <ms-step-configuration
     (onValueChanges)="changeStep($event)"
+    [step]="step"
     [eventAttributes]="eventAttributes"></ms-step-configuration>
 </div>

@@ -13,9 +13,6 @@ export class StepPageComponent implements OnDestroy {
   eventAttributes = [];
   subscriptions = [];
   existingData = [];
-  // existingData = ['python_1', 'python_2', 'python_3', 'test123', 'test321',
-  //   'qweqwe', 'pyth123', 'qweqweqw', 'ewqeqwewqd', 'dsadasdasas', '1', '2', '3', '4','python_1', 'python_2', 'python_3', 'test123', 'test321',
-  //   'qweqwe', 'pyth123', 'qweqweqw', 'ewqeqwewqd', 'dsadasdasas', '1', '2', '3', '4'];
 
   constructor(private stepService: StepsService) {
     stepService.getEventAttributes()
@@ -43,6 +40,15 @@ export class StepPageComponent implements OnDestroy {
     this.steps.push(step);
   }
 
+  cloneStep(step) {
+    const clone = this.stepService.cloneStep(step);
+    this.steps.push(clone);
+  }
+
+  deleteStep(step) {
+    const steps = this.stepService.deleteStep(step);
+    this.steps = steps;
+  }
   ngOnDestroy() {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();

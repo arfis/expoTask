@@ -18,5 +18,9 @@
   },
   "configuration": {
     "and": "and"
+  },
+  "actions": {
+    "delete": "Delete",
+    "clone": "Clone"
   }
 }

@@ -8,7 +8,6 @@ import { Step } from '../../model/Step';
 })
 export class StepsService {
 
-  stepEmitter = new Subject<Step[]>();
   resetEmitter = new Subject();
 
   steps: Step[] = [];
@@ -43,8 +42,25 @@ export class StepsService {
   createStep(name) {
     const step = new Step(this.steps.length, name);
     this.steps.push(step);
-    this.stepEmitter.next(this.steps);
     return step;
+  }
+
+  cloneStep(step) {
+    const {name, events} = step;
+    const clone = new Step(this.steps.length, name, events);
+    this.steps.push(clone);
+    return clone;
+  }
+
+  deleteStep(step) {
+    const steps = this.steps
+      .filter(actualStep => actualStep.id !== step.id)
+      .map((actualStep, index) => {
+        actualStep.index = index;
+        return actualStep;
+      })
+    this.steps = [...steps];
+    return steps;
   }
 
   getEventAttributes(): Observable<any[]> {

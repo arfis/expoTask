@@ -7,7 +7,7 @@
     <div class="events" formArrayName="events">
       <div [formGroupName]="i" class="configuration-row" *ngFor="let event of events.controls; let i=index">
         <select formControlName="name">
-          <option *ngFor="let attribute of selectedEventAttributes">{{attribute}}</option>
+          <option *ngFor="let attribute of selectedEventAttributes" [ngValue]="attribute">{{attribute}}</option>
         </select>
 
         <select formControlName="operation">

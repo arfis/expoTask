@@ -11,6 +11,7 @@ import { Operation } from '../../model/Operation';
 export class StepConfigurationComponent implements OnInit, OnChanges {
 
   @Input('eventAttributes') eventAttributes;
+  @Input('step') step;
   @Output('onValueChanges') valueChanges = new EventEmitter();
 
   configurationForm;
@@ -35,14 +36,13 @@ export class StepConfigurationComponent implements OnInit, OnChanges {
   ];
 
   constructor(private fb: FormBuilder) {
+    this.configurationForm = this.fb.group({
+      name: [''],
+      events: this.fb.array([])
+    });
   }
 
   ngOnInit() {
-    this.configurationForm = this.fb.group({
-      name: [this.eventAttributes[0].name],
-      events: this.fb.array([])
-    });
-
     this.configurationForm.valueChanges.subscribe(
       form => {
         this.valueChanges.next(form);
@@ -55,6 +55,17 @@ export class StepConfigurationComponent implements OnInit, OnChanges {
   ngOnChanges(changes) {
     if (changes.eventAttributes) {
       this.setupEventNames();
+    }
+    if (changes.step) {
+      if (this.step && this.configurationForm) {
+        const {events} = this.step;
+        const missingAttributesCount = events.length - this.events.length;
+
+        for (let index = 0; index < missingAttributesCount; index++) {
+          this.addEvent();
+        }
+        this.configurationForm.patchValue(this.step);
+      }
     }
   }
 
@@ -93,8 +104,8 @@ export class StepConfigurationComponent implements OnInit, OnChanges {
   }
 
   get selectedEventAttributes() {
-    const attributes = this.eventAttributes.find(attribute => attribute.name === this.selectedEvent).attributes;
-    return attributes;
+    const selectedEvent = this.eventAttributes.find(attribute => attribute.name === this.selectedEvent);
+    return selectedEvent ? selectedEvent.attributes : [];
   }
 
 }

@@ -2,3 +2,26 @@ ms-step-configuration {
   margin: 10px 3px;
   display: block;
 }
+
+.step-wrapper {
+  .actions {
+    display: block;
+    opacity: 0;
+    width: 100%;
+
+    * {
+      cursor: pointer;
+      float: right;
+    }
+  }
+
+  &:hover {
+    .actions {
+      opacity: 1;
+    }
+  }
+}
+
+.header {
+  display: flex;
+}

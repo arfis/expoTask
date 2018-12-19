@@ -45,9 +45,8 @@ export class SelectInputComponent implements OnInit, OnDestroy, ControlValueAcce
 
   @HostListener('document:click', ['$event'])
   onClick(event) {
-    if (this.element.nativeElement.contains(event.target)) {
-      this.setupResult(this.value);
-    } else {
+    this.setupInput(this.value);
+    if (!this.element.nativeElement.contains(event.target)) {
       this.foundData = [];
     }
   }
